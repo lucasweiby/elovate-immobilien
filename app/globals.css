@@ -1647,26 +1647,64 @@ html:has(.home-page) {
   background: #fff;
 }
 
+.home-partner-carousel {
+  margin-top: clamp(32px, 4vw, 48px);
+  position: relative;
+  width: 100%;
+}
+
+.home-partner-window {
+  border: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black clamp(48px, 12vw, 140px),
+    black calc(100% - clamp(48px, 12vw, 140px)),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black clamp(48px, 12vw, 140px),
+    black calc(100% - clamp(48px, 12vw, 140px)),
+    transparent 100%
+  );
+}
+
+.home-partner-track {
+  animation: home-partner-scroll 35s linear infinite;
+  display: flex;
+  user-select: none;
+  width: max-content;
+  will-change: transform;
+}
+
+.home-partner-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes home-partner-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 .home-partner-strip {
   align-items: center;
   border: 0;
   display: flex;
+  flex-shrink: 0;
   gap: clamp(40px, 8.9vw, 128px);
   justify-content: flex-start;
-  margin-top: 0;
+  margin: 0;
   min-height: 112px;
-  overflow: hidden;
-}
-
-.home-partner-window {
-  border-block: 1px solid var(--home-line);
-  overflow: hidden;
-}
-
-.home-partner-window .home-partner-strip {
-  border: 0;
-  justify-content: flex-start;
-  transition: transform 320ms ease;
+  padding-right: clamp(40px, 8.9vw, 128px);
 }
 
 .home-partner-strip > span {
@@ -1677,15 +1715,23 @@ html:has(.home-page) {
 }
 
 .home-partner-logo {
+  align-items: center;
+  display: flex;
   flex: 0 0 auto;
   height: 48px;
+  justify-content: center;
   position: relative;
 }
 
 .home-partner-logo > img {
   filter: grayscale(1);
-  opacity: 0.23;
+  opacity: 0.75;
   object-fit: contain;
+  transition: opacity 200ms ease;
+}
+
+.home-partner-logo:hover > img {
+  opacity: 1;
 }
 
 .home-partner-logo > img.home-partner-logo-mark {
@@ -1698,37 +1744,14 @@ html:has(.home-page) {
   object-fit: fill;
 }
 
+.home-partner-logo-two > img.home-partner-logo-mark,
 .home-partner-logo:nth-child(5) > img.home-partner-logo-mark {
   inset: 0 73.73% 0 0;
 }
 
+.home-partner-logo-two > img.home-partner-logo-wordmark,
 .home-partner-logo:nth-child(5) > img.home-partner-logo-wordmark {
   inset: 22.5% 0.15% 22.35% 30.22%;
-}
-
-.home-carousel-controls {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 24px;
-}
-
-.home-carousel-controls button {
-  align-items: center;
-  background: #fff;
-  border: 1px solid #d0d7ee;
-  border-radius: 50%;
-  color: var(--home-blue);
-  cursor: pointer;
-  display: flex;
-  height: 40px;
-  justify-content: center;
-  width: 40px;
-}
-
-.home-carousel-controls button:first-child {
-  background: var(--home-blue);
-  color: #fff;
 }
 
 .home-testimonial-grid {
@@ -2573,8 +2596,9 @@ html:has(.home-page) {
   .home-partner-strip {
     gap: 36px;
     justify-content: flex-start;
-    margin-inline: -24px;
-    padding-inline: 24px;
+    margin: 0;
+    padding-inline: 0;
+    padding-right: 36px;
   }
 
   .home-before-after {
@@ -2724,5 +2748,13 @@ html:has(.home-page) {
   .home-page button:active {
     filter: none;
     transform: none;
+  }
+
+  .home-partner-track {
+    animation: none !important;
+  }
+
+  .home-partner-window {
+    overflow-x: auto;
   }
 }

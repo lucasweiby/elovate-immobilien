@@ -10,7 +10,7 @@ import {
   ViewTransition,
   type FormEvent,
 } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 const navigation = [
   ["About us", "#numbers"],
@@ -351,131 +351,166 @@ export function ServiceSelector() {
   );
 }
 
-export function PartnerCarousel() {
-  const [offset, setOffset] = useState(0);
-  const partners = [
-    {
-      name: "Logoipsum wordmark",
-      width: 203,
-      image: "/images/partner-wordmark-one.svg",
-    },
-    {
-      name: "Logoipsum mark",
-      width: 48,
-      image: "/images/partner-mark-one.svg",
-    },
-    {
-      name: "Logoipsum logo",
-      width: 373,
-      mark: "/images/partner-logomark-main.svg",
-      wordmark: "/images/partner-logotype-main.svg",
-    },
-    {
-      name: "Logoipsum mark",
-      width: 48,
-      image: "/images/partner-mark-two.svg",
-    },
-    {
-      name: "Logoipsum logo",
-      width: 283,
-      mark: "/images/partner-logogram-two.svg",
-      wordmark: "/images/partner-logotype-two.svg",
-    },
-    {
-      name: "Logoipsum mark",
-      width: 48,
-      image: "/images/partner-mark-three.svg",
-    },
-  ];
+const partners = [
+  {
+    name: "Logoipsum wordmark",
+    width: 203,
+    image: "/images/partner-wordmark-one.svg",
+  },
+  {
+    name: "Logoipsum mark",
+    width: 48,
+    image: "/images/partner-mark-one.svg",
+  },
+  {
+    name: "Logoipsum logo",
+    width: 373,
+    mark: "/images/partner-logomark-main.svg",
+    wordmark: "/images/partner-logotype-main.svg",
+  },
+  {
+    name: "Logoipsum mark",
+    width: 48,
+    image: "/images/partner-mark-two.svg",
+  },
+  {
+    name: "Logoipsum logo",
+    width: 283,
+    mark: "/images/partner-logogram-two.svg",
+    wordmark: "/images/partner-logotype-two.svg",
+    isVariantTwo: true,
+  },
+  {
+    name: "Logoipsum mark",
+    width: 48,
+    image: "/images/partner-mark-three.svg",
+  },
+];
 
+const partnerList = [...partners, ...partners];
+
+export function PartnerCarousel() {
   return (
     <div className="home-partner-carousel">
       <div
         className="home-partner-window"
         aria-label="Illustrative partner marks"
       >
-        <div
-          className="home-partner-strip"
-          style={{ transform: `translateX(-${offset * 220}px)` }}
-        >
-          {partners.map((partner, index) => (
-            <div
-              className="home-partner-logo"
-              key={`${partner.name}-${index}`}
-              style={{ width: partner.width }}
-              role="img"
-              aria-label={partner.name}
-            >
-              {partner.image ? (
-                <Image
-                  src={partner.image}
-                  alt=""
-                  fill
-                  sizes={`${partner.width}px`}
-                />
-              ) : (
-                <>
+        <div className="home-partner-track">
+          <div className="home-partner-strip">
+            {partnerList.map((partner, index) => (
+              <div
+                className={`home-partner-logo${partner.isVariantTwo ? " home-partner-logo-two" : ""}`}
+                key={`partner-track-1-${index}`}
+                style={{ width: partner.width }}
+                role="img"
+                aria-label={partner.name}
+              >
+                {partner.image ? (
                   <Image
-                    className="home-partner-logo-mark"
-                    src={partner.mark!}
+                    src={partner.image}
                     alt=""
-                    width={partner.width === 373 ? 58 : 74}
-                    height={48}
-                    sizes="74px"
-                    style={{
-                      bottom: "auto",
-                      height: "100%",
-                      left: 0,
-                      objectFit: "fill",
-                      right: "auto",
-                      top: 0,
-                      width: partner.width === 373 ? "15.43%" : "26.27%",
-                    }}
+                    fill
+                    sizes={`${partner.width}px`}
                   />
+                ) : (
+                  <>
+                    <Image
+                      className="home-partner-logo-mark"
+                      src={partner.mark!}
+                      alt=""
+                      width={partner.width === 373 ? 58 : 74}
+                      height={48}
+                      sizes="74px"
+                      style={{
+                        bottom: "auto",
+                        height: "100%",
+                        left: 0,
+                        objectFit: "fill",
+                        right: "auto",
+                        top: 0,
+                        width: partner.width === 373 ? "15.43%" : "26.27%",
+                      }}
+                    />
+                    <Image
+                      className="home-partner-logo-wordmark"
+                      src={partner.wordmark!}
+                      alt=""
+                      width={partner.width === 373 ? 296 : 197}
+                      height={partner.width === 373 ? 26 : 27}
+                      sizes="300px"
+                      style={{
+                        bottom: "auto",
+                        height: partner.width === 373 ? "53.13%" : "55.15%",
+                        left: partner.width === 373 ? "20.58%" : "30.22%",
+                        objectFit: "fill",
+                        right: "auto",
+                        top: "22.5%",
+                        width: partner.width === 373 ? "79.33%" : "69.63%",
+                      }}
+                    />
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="home-partner-strip" aria-hidden="true">
+            {partnerList.map((partner, index) => (
+              <div
+                className={`home-partner-logo${partner.isVariantTwo ? " home-partner-logo-two" : ""}`}
+                key={`partner-track-2-${index}`}
+                style={{ width: partner.width }}
+                role="presentation"
+              >
+                {partner.image ? (
                   <Image
-                    className="home-partner-logo-wordmark"
-                    src={partner.wordmark!}
+                    src={partner.image}
                     alt=""
-                    width={partner.width === 373 ? 296 : 197}
-                    height={partner.width === 373 ? 26 : 27}
-                    sizes="300px"
-                    style={{
-                      bottom: "auto",
-                      height: partner.width === 373 ? "53.13%" : "55.15%",
-                      left: partner.width === 373 ? "20.58%" : "30.22%",
-                      objectFit: "fill",
-                      right: "auto",
-                      top: "22.5%",
-                      width: partner.width === 373 ? "79.33%" : "69.63%",
-                    }}
+                    fill
+                    sizes={`${partner.width}px`}
                   />
-                </>
-              )}
-            </div>
-          ))}
+                ) : (
+                  <>
+                    <Image
+                      className="home-partner-logo-mark"
+                      src={partner.mark!}
+                      alt=""
+                      width={partner.width === 373 ? 58 : 74}
+                      height={48}
+                      sizes="74px"
+                      style={{
+                        bottom: "auto",
+                        height: "100%",
+                        left: 0,
+                        objectFit: "fill",
+                        right: "auto",
+                        top: 0,
+                        width: partner.width === 373 ? "15.43%" : "26.27%",
+                      }}
+                    />
+                    <Image
+                      className="home-partner-logo-wordmark"
+                      src={partner.wordmark!}
+                      alt=""
+                      width={partner.width === 373 ? 296 : 197}
+                      height={partner.width === 373 ? 26 : 27}
+                      sizes="300px"
+                      style={{
+                        bottom: "auto",
+                        height: partner.width === 373 ? "53.13%" : "55.15%",
+                        left: partner.width === 373 ? "20.58%" : "30.22%",
+                        objectFit: "fill",
+                        right: "auto",
+                        top: "22.5%",
+                        width: partner.width === 373 ? "79.33%" : "69.63%",
+                      }}
+                    />
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="home-carousel-controls">
-        <button
-          type="button"
-          aria-label="Previous partners"
-          onClick={() =>
-            setOffset(
-              (current) => (current + partners.length - 1) % partners.length,
-            )
-          }
-        >
-          <ChevronLeft size={17} />
-        </button>
-        <button
-          type="button"
-          aria-label="Next partners"
-          onClick={() =>
-            setOffset((current) => (current + 1) % partners.length)
-          }
-        >
-          <ChevronRight size={17} />
-        </button>
       </div>
     </div>
   );

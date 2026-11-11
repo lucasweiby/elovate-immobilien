@@ -287,7 +287,7 @@ export default function Home() {
               <ServiceSelector />
               <div className="home-service-photo">
                 <Image
-                  src="/images/services-architecture.png"
+                  src="/images/building.jpg"
                   alt="Modern residential architecture"
                   width={808}
                   height={608}
@@ -353,24 +353,24 @@ export default function Home() {
                       style={
                         property.imageCrop === "azura"
                           ? {
+                            bottom: "auto",
+                            height: "257.23%",
+                            left: "-15.32%",
+                            objectFit: "fill",
+                            right: "auto",
+                            top: "-36.42%",
+                            width: "337.5%",
+                          }
+                          : property.imageCrop === "serenity"
+                            ? {
                               bottom: "auto",
-                              height: "257.23%",
+                              height: "255.75%",
                               left: "-15.32%",
                               objectFit: "fill",
                               right: "auto",
-                              top: "-36.42%",
+                              top: "-150%",
                               width: "337.5%",
                             }
-                          : property.imageCrop === "serenity"
-                            ? {
-                                bottom: "auto",
-                                height: "255.75%",
-                                left: "-15.32%",
-                                objectFit: "fill",
-                                right: "auto",
-                                top: "-150%",
-                                width: "337.5%",
-                              }
                             : undefined
                       }
                       sizes="(max-width: 760px) 100vw, 320px"
